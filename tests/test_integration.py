@@ -54,10 +54,10 @@ class TestCalculatorIntegration:
     def test_error_handling_integration(self):
         """Test error handling across all components."""
         test_cases = [
-            "5 / 0",      # Division by zero
-            "abc + 3",    # Invalid number
-            "5 % 3",      # Invalid operation
-            "5 +",        # Invalid format (prints 2 messages)
+            "5 / 0",  # Division by zero
+            "abc + 3",  # Invalid number
+            "5 % 3",  # Invalid operation
+            "5 +",  # Invalid format (prints 2 messages)
         ]
 
         with patch("builtins.print") as mock_print:

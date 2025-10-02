@@ -141,10 +141,8 @@ class TestInputValidator:
         """Test operation validation with invalid inputs."""
         with pytest.raises(ValueError, match="Unsupported operation"):
             self.validator.validate_operation(invalid_operation)
-    
-    @pytest.mark.parametrize(
-        "empty_operation", ["", "   "]
-    )
+
+    @pytest.mark.parametrize("empty_operation", ["", "   "])
     def test_validate_operation_empty_inputs(self, empty_operation):
         """Test operation validation with empty inputs."""
         with pytest.raises(ValueError, match="Operation cannot be empty"):
@@ -283,7 +281,10 @@ class TestCalculator:
         # Error message should be printed (check both calls)
         printed_calls = [str(call) for call in mock_print.call_args_list]
         printed_text = " ".join(printed_calls)
-        assert "Please enter calculation in format" in printed_text or "Example: 5 + 3 or 10 / 2" in printed_text
+        assert (
+            "Please enter calculation in format" in printed_text
+            or "Example: 5 + 3 or 10 / 2" in printed_text
+        )
 
     @patch("builtins.print")
     def test_handle_calculation_division_by_zero(self, mock_print):
@@ -369,24 +370,28 @@ class TestCalculator:
         """Test _handle_calculation with unexpected error during calculation creation."""
         # Mock factory to raise unexpected error
         mock_create.side_effect = RuntimeError("Unexpected factory error")
-        
+
         self.calculator._handle_calculation("5 + 3")
 
         # Should print error message and not add to history
         assert len(self.calculator.history) == 0
-        mock_print.assert_called_with("Error processing calculation: Unexpected factory error")
+        mock_print.assert_called_with(
+            "Error processing calculation: Unexpected factory error"
+        )
 
     @patch("calculation.Calculation.execute")
     @patch("calculation.CalculationFactory.create_calculation")
     @patch("builtins.print")
-    def test_handle_calculation_execution_unexpected_error(self, mock_print, mock_create, mock_execute):
+    def test_handle_calculation_execution_unexpected_error(
+        self, mock_print, mock_create, mock_execute
+    ):
         """Test _handle_calculation with unexpected error during calculation execution."""
         # Mock calculation execution to raise unexpected error
         mock_calc = Mock()
         mock_create.return_value = mock_calc
         mock_execute.side_effect = RuntimeError("Execution error")
         mock_calc.execute = mock_execute
-        
+
         self.calculator._handle_calculation("5 + 3")
 
         # Should print error message and not add to history
