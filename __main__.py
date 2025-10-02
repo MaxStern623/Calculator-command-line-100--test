@@ -5,8 +5,8 @@ This module allows the calculator to be run as a Python module.
 Usage: python -m calculator
 """
 
-import sys
 import os
+import sys
 
 # Add the current directory to Python path to find modules
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

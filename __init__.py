@@ -8,7 +8,7 @@ with floating point precision.
 Features:
 - Interactive REPL interface
 - Calculation history with timestamps
-- Input validation and error handling  
+- Input validation and error handling
 - Support for integers and floating-point numbers
 - Modular design with factory pattern
 - Comprehensive test coverage

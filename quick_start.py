@@ -5,14 +5,16 @@ Quick start guide for the Professional Calculator
 This script demonstrates how to use the calculator interactively
 """
 
-import sys
 import os
+import sys
 
 # Ensure proper path setup
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+
 def show_usage():
-    print("""
+    print(
+        """
 🧮 Professional Calculator - Quick Start Guide
 ================================================
 
@@ -84,22 +86,27 @@ tests/             - Comprehensive test suite
 └── Parameterized  - Test multiple scenarios efficiently
 
 ===============================
-""")
+"""
+    )
+
 
 if __name__ == "__main__":
     show_usage()
-    
-    response = input("Would you like to start the calculator now? (y/n): ").lower().strip()
-    
-    if response in ['y', 'yes']:
+
+    response = (
+        input("Would you like to start the calculator now? (y/n): ").lower().strip()
+    )
+
+    if response in ["y", "yes"]:
         print("\nStarting calculator...")
         print("=" * 40)
         from calculator import main
+
         main()
     else:
         print("\nTo start the calculator later, run:")
         print("  python calculator/__init__.py")
         print("\nTo see the demo, run:")
         print("  python demo.py")
-        print("\nTo run tests, run:")  
+        print("\nTo run tests, run:")
         print("  python test_runner.py")
