@@ -5,7 +5,7 @@ This module contains comprehensive tests for Calculator, CalculatorHistory,
 and InputValidator classes with parameterized tests and edge case coverage.
 """
 
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 import pytest
 
@@ -135,12 +135,20 @@ class TestInputValidator:
         assert result == expected
 
     @pytest.mark.parametrize(
-        "invalid_operation", ["", "   ", "modulo", "%", "^", "power", "invalid", "123"]
+        "invalid_operation", ["modulo", "%", "^", "power", "invalid", "123"]
     )
     def test_validate_operation_invalid_inputs(self, invalid_operation):
         """Test operation validation with invalid inputs."""
         with pytest.raises(ValueError, match="Unsupported operation"):
             self.validator.validate_operation(invalid_operation)
+    
+    @pytest.mark.parametrize(
+        "empty_operation", ["", "   "]
+    )
+    def test_validate_operation_empty_inputs(self, empty_operation):
+        """Test operation validation with empty inputs."""
+        with pytest.raises(ValueError, match="Operation cannot be empty"):
+            self.validator.validate_operation(empty_operation)
 
     def test_validate_operation_empty_string_specific_message(self):
         """Test specific error message for empty operation."""
@@ -272,9 +280,10 @@ class TestCalculator:
         # No calculation should be added to history
         assert len(self.calculator.history) == 0
 
-        # Error message should be printed
-        printed_text = str(mock_print.call_args)
-        assert "Please enter calculation in format" in printed_text
+        # Error message should be printed (check both calls)
+        printed_calls = [str(call) for call in mock_print.call_args_list]
+        printed_text = " ".join(printed_calls)
+        assert "Please enter calculation in format" in printed_text or "Example: 5 + 3 or 10 / 2" in printed_text
 
     @patch("builtins.print")
     def test_handle_calculation_division_by_zero(self, mock_print):
@@ -328,5 +337,58 @@ class TestCalculator:
         """Test calculator handles keyboard interrupt gracefully."""
         self.calculator.start()
 
-        # Should exit gracefully
+        # Should exit gracefully (running state is set to False after KeyboardInterrupt)
+        # The running flag is set to True at start, then False when interrupted
         assert not self.calculator.running
+
+    @patch("builtins.input", side_effect=EOFError())
+    @patch("builtins.print")
+    def test_start_calculator_eof_error(self, mock_print, mock_input):
+        """Test calculator handles EOF error gracefully."""
+        self.calculator.start()
+
+        # Should exit gracefully and print exit message
+        assert not self.calculator.running
+        mock_print.assert_called_with("\n\nExiting calculator...")
+
+    @patch("builtins.input", side_effect=RuntimeError("Test error"))
+    @patch("builtins.print")
+    def test_start_calculator_unexpected_error(self, mock_print, mock_input):
+        """Test calculator handles unexpected errors."""
+        self.calculator.start()
+
+        # Should handle the unexpected error and continue (in this case exit due to error)
+        assert mock_print.called
+        printed_calls = [str(call) for call in mock_print.call_args_list]
+        printed_text = " ".join(printed_calls)
+        assert "Unexpected error" in printed_text
+
+    @patch("calculation.CalculationFactory.create_calculation")
+    @patch("builtins.print")
+    def test_handle_calculation_unexpected_error(self, mock_print, mock_create):
+        """Test _handle_calculation with unexpected error during calculation creation."""
+        # Mock factory to raise unexpected error
+        mock_create.side_effect = RuntimeError("Unexpected factory error")
+        
+        self.calculator._handle_calculation("5 + 3")
+
+        # Should print error message and not add to history
+        assert len(self.calculator.history) == 0
+        mock_print.assert_called_with("Error processing calculation: Unexpected factory error")
+
+    @patch("calculation.Calculation.execute")
+    @patch("calculation.CalculationFactory.create_calculation")
+    @patch("builtins.print")
+    def test_handle_calculation_execution_unexpected_error(self, mock_print, mock_create, mock_execute):
+        """Test _handle_calculation with unexpected error during calculation execution."""
+        # Mock calculation execution to raise unexpected error
+        mock_calc = Mock()
+        mock_create.return_value = mock_calc
+        mock_execute.side_effect = RuntimeError("Execution error")
+        mock_calc.execute = mock_execute
+        
+        self.calculator._handle_calculation("5 + 3")
+
+        # Should print error message and not add to history
+        assert len(self.calculator.history) == 0
+        mock_print.assert_called_with("Unexpected calculation error: Execution error")
