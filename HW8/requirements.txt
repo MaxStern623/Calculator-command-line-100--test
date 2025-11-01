@@ -1,7 +1,0 @@
-fastapi
-uvicorn[standard]
-mongoengine
-pytest
-httpx
-requests
-playwright
