@@ -1,0 +1,521 @@
+INFO:     Will watch for changes in these directories: ['/home/max/Documents/IS601/HW8']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [15791] using StatReload
+INFO:     Started server process [15794]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:37920 - "GET /history HTTP/1.1" 200 OK
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/home/max/.local/lib/python3.8/site-packages/fastapi/applications.py", line 1134, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/max/.local/lib/python3.8/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/home/max/.local/lib/python3.8/site-packages/fastapi/routing.py", line 124, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/max/.local/lib/python3.8/site-packages/fastapi/routing.py", line 110, in app
+    response = await f(request)
+  File "/home/max/.local/lib/python3.8/site-packages/fastapi/routing.py", line 390, in app
+    raw_response = await run_endpoint_function(
+  File "/home/max/.local/lib/python3.8/site-packages/fastapi/routing.py", line 289, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/home/max/Documents/IS601/HW8/main.py", line 40, in get_history
+    return {'responce': json.loads(historyItems.to_json())}
+  File "/home/max/.local/lib/python3.8/site-packages/mongoengine/queryset/base.py", line 1329, in to_json
+    return json_util.dumps(self.as_pymongo(), *args, **kwargs)
+  File "/home/max/.local/lib/python3.8/site-packages/bson/json_util.py", line 473, in dumps
+    return json.dumps(_json_convert(obj, json_options), *args, **kwargs)
+  File "/home/max/.local/lib/python3.8/site-packages/bson/json_util.py", line 517, in _json_convert
+    return [_json_convert(v, json_options) for v in obj]
+  File "/home/max/.local/lib/python3.8/site-packages/bson/json_util.py", line 517, in <listcomp>
+    return [_json_convert(v, json_options) for v in obj]
+  File "/home/max/.local/lib/python3.8/site-packages/mongoengine/queryset/queryset.py", line 109, in _iter_results
+    self._populate_cache()
+  File "/home/max/.local/lib/python3.8/site-packages/mongoengine/queryset/queryset.py", line 128, in _populate_cache
+    self._result_cache.append(next(self))
+  File "/home/max/.local/lib/python3.8/site-packages/mongoengine/queryset/base.py", line 1646, in __next__
+    raw_doc = next(self._cursor)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/cursor.py", line 1243, in next
+    if len(self.__data) or self._refresh():
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/cursor.py", line 1160, in _refresh
+    self.__send_message(q)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/cursor.py", line 1039, in __send_message
+    response = client._run_operation(
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/_csot.py", line 108, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/mongo_client.py", line 1431, in _run_operation
+    return self._retryable_read(
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/mongo_client.py", line 1540, in _retryable_read
+    return self._retry_internal(
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/_csot.py", line 108, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/mongo_client.py", line 1496, in _retry_internal
+    return _ClientConnectionRetryable(
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/mongo_client.py", line 2353, in run
+    return self._read() if self._is_read else self._write()
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/mongo_client.py", line 2485, in _read
+    with self._client._conn_from_server(self._read_pref, self._server, self._session) as (
+  File "/usr/lib/python3.8/contextlib.py", line 113, in __enter__
+    return next(self.gen)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/mongo_client.py", line 1357, in _conn_from_server
+    with self._checkout(server, session) as conn:
+  File "/usr/lib/python3.8/contextlib.py", line 113, in __enter__
+    return next(self.gen)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/mongo_client.py", line 1266, in _checkout
+    with server.checkout(handler=err_handler) as conn:
+  File "/usr/lib/python3.8/contextlib.py", line 113, in __enter__
+    return next(self.gen)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/pool.py", line 1767, in checkout
+    conn = self._get_conn(checkout_started_time, handler=handler)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/pool.py", line 1926, in _get_conn
+    conn = self.connect(handler=handler)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/pool.py", line 1729, in connect
+    conn.authenticate()
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/pool.py", line 1099, in authenticate
+    auth.authenticate(creds, self, reauthenticate=reauthenticate)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/auth.py", line 656, in authenticate
+    auth_func(credentials, conn)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/auth.py", line 560, in _authenticate_default
+    return _authenticate_scram(credentials, conn, "SCRAM-SHA-1")
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/auth.py", line 299, in _authenticate_scram
+    res = conn.command(source, cmd)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/helpers.py", line 342, in inner
+    return func(*args, **kwargs)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/pool.py", line 989, in command
+    return command(
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/network.py", line 212, in command
+    helpers._check_command_response(
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/helpers.py", line 248, in _check_command_response
+    raise OperationFailure(errmsg, code, response, max_wire_version)
+pymongo.errors.OperationFailure: Authentication failed., full error: {'ok': 0.0, 'errmsg': 'Authentication failed.', 'code': 18, 'codeName': 'AuthenticationFailed'}
+INFO:     127.0.0.1:52462 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52462 - "GET /openapi.json HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'operations.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [15794]
+INFO:     Started server process [16314]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [16314]
+Process SpawnProcess-3:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 69, in serve
+    await self._serve(sockets)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 76, in _serve
+    config.load()
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/config.py", line 434, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 844, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 981, in get_code
+  File "<frozen importlib._bootstrap_external>", line 911, in source_to_code
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/max/Documents/IS601/HW8/main.py", line 65
+    responce['operation'] = str(
+                               ^
+IndentationError: unindent does not match any outer indentation level
+WARNING:  StatReload detected changes in 'tests/test_operations.py'. Reloading...
+Process SpawnProcess-4:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 69, in serve
+    await self._serve(sockets)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 76, in _serve
+    config.load()
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/config.py", line 434, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 844, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 981, in get_code
+  File "<frozen importlib._bootstrap_external>", line 911, in source_to_code
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/max/Documents/IS601/HW8/main.py", line 65
+    responce['operation'] = str(
+                               ^
+IndentationError: unindent does not match any outer indentation level
+WARNING:  StatReload detected changes in 'tests/test_api_e2e.py'. Reloading...
+Process SpawnProcess-5:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 69, in serve
+    await self._serve(sockets)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 76, in _serve
+    config.load()
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/config.py", line 434, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 844, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 981, in get_code
+  File "<frozen importlib._bootstrap_external>", line 911, in source_to_code
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/max/Documents/IS601/HW8/main.py", line 65
+    responce['operation'] = str(
+                               ^
+IndentationError: unindent does not match any outer indentation level
+WARNING:  StatReload detected changes in '__init__.py'. Reloading...
+Process SpawnProcess-6:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 69, in serve
+    await self._serve(sockets)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 76, in _serve
+    config.load()
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/config.py", line 434, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 844, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 981, in get_code
+  File "<frozen importlib._bootstrap_external>", line 911, in source_to_code
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/max/Documents/IS601/HW8/main.py", line 65
+    responce['operation'] = str(
+                               ^
+IndentationError: unindent does not match any outer indentation level
+WARNING:  StatReload detected changes in 'tests/test_operations.py'. Reloading...
+Process SpawnProcess-7:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 69, in serve
+    await self._serve(sockets)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 76, in _serve
+    config.load()
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/config.py", line 434, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 844, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 981, in get_code
+  File "<frozen importlib._bootstrap_external>", line 911, in source_to_code
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/max/Documents/IS601/HW8/main.py", line 65
+    responce['operation'] = str(
+                               ^
+IndentationError: unindent does not match any outer indentation level
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
+Process SpawnProcess-8:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 69, in serve
+    await self._serve(sockets)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 76, in _serve
+    config.load()
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/config.py", line 434, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/max/Documents/IS601/HW8/main.py", line 31, in <module>
+    @app.exception_handler(Exception)
+NameError: name 'app' is not defined
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
+Process SpawnProcess-9:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+  File "/usr/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 69, in serve
+    await self._serve(sockets)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/server.py", line 76, in _serve
+    config.load()
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/config.py", line 434, in load
+    self.loaded_app = import_from_string(self.app)
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/max/Documents/IS601/HW8/main.py", line 30, in <module>
+    @app.exception_handler(Exception)
+NameError: name 'app' is not defined
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
+INFO:     Started server process [17014]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:47758 - "GET /history HTTP/1.1" 200 OK
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/home/max/.local/lib/python3.8/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/home/max/.local/lib/python3.8/site-packages/fastapi/applications.py", line 1134, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/max/.local/lib/python3.8/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/home/max/.local/lib/python3.8/site-packages/fastapi/routing.py", line 124, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/max/.local/lib/python3.8/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/max/.local/lib/python3.8/site-packages/fastapi/routing.py", line 110, in app
+    response = await f(request)
+  File "/home/max/.local/lib/python3.8/site-packages/fastapi/routing.py", line 390, in app
+    raw_response = await run_endpoint_function(
+  File "/home/max/.local/lib/python3.8/site-packages/fastapi/routing.py", line 289, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/home/max/Documents/IS601/HW8/main.py", line 43, in get_history
+    return {'responce': json.loads(historyItems.to_json())}
+  File "/home/max/.local/lib/python3.8/site-packages/mongoengine/queryset/base.py", line 1329, in to_json
+    return json_util.dumps(self.as_pymongo(), *args, **kwargs)
+  File "/home/max/.local/lib/python3.8/site-packages/bson/json_util.py", line 473, in dumps
+    return json.dumps(_json_convert(obj, json_options), *args, **kwargs)
+  File "/home/max/.local/lib/python3.8/site-packages/bson/json_util.py", line 517, in _json_convert
+    return [_json_convert(v, json_options) for v in obj]
+  File "/home/max/.local/lib/python3.8/site-packages/bson/json_util.py", line 517, in <listcomp>
+    return [_json_convert(v, json_options) for v in obj]
+  File "/home/max/.local/lib/python3.8/site-packages/mongoengine/queryset/queryset.py", line 109, in _iter_results
+    self._populate_cache()
+  File "/home/max/.local/lib/python3.8/site-packages/mongoengine/queryset/queryset.py", line 128, in _populate_cache
+    self._result_cache.append(next(self))
+  File "/home/max/.local/lib/python3.8/site-packages/mongoengine/queryset/base.py", line 1646, in __next__
+    raw_doc = next(self._cursor)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/cursor.py", line 1243, in next
+    if len(self.__data) or self._refresh():
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/cursor.py", line 1160, in _refresh
+    self.__send_message(q)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/cursor.py", line 1039, in __send_message
+    response = client._run_operation(
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/_csot.py", line 108, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/mongo_client.py", line 1431, in _run_operation
+    return self._retryable_read(
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/mongo_client.py", line 1540, in _retryable_read
+    return self._retry_internal(
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/_csot.py", line 108, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/mongo_client.py", line 1496, in _retry_internal
+    return _ClientConnectionRetryable(
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/mongo_client.py", line 2353, in run
+    return self._read() if self._is_read else self._write()
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/mongo_client.py", line 2485, in _read
+    with self._client._conn_from_server(self._read_pref, self._server, self._session) as (
+  File "/usr/lib/python3.8/contextlib.py", line 113, in __enter__
+    return next(self.gen)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/mongo_client.py", line 1357, in _conn_from_server
+    with self._checkout(server, session) as conn:
+  File "/usr/lib/python3.8/contextlib.py", line 113, in __enter__
+    return next(self.gen)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/mongo_client.py", line 1266, in _checkout
+    with server.checkout(handler=err_handler) as conn:
+  File "/usr/lib/python3.8/contextlib.py", line 113, in __enter__
+    return next(self.gen)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/pool.py", line 1767, in checkout
+    conn = self._get_conn(checkout_started_time, handler=handler)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/pool.py", line 1926, in _get_conn
+    conn = self.connect(handler=handler)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/pool.py", line 1729, in connect
+    conn.authenticate()
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/pool.py", line 1099, in authenticate
+    auth.authenticate(creds, self, reauthenticate=reauthenticate)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/auth.py", line 656, in authenticate
+    auth_func(credentials, conn)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/auth.py", line 560, in _authenticate_default
+    return _authenticate_scram(credentials, conn, "SCRAM-SHA-1")
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/auth.py", line 299, in _authenticate_scram
+    res = conn.command(source, cmd)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/helpers.py", line 342, in inner
+    return func(*args, **kwargs)
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/pool.py", line 989, in command
+    return command(
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/network.py", line 212, in command
+    helpers._check_command_response(
+  File "/home/max/.local/lib/python3.8/site-packages/pymongo/helpers.py", line 248, in _check_command_response
+    raise OperationFailure(errmsg, code, response, max_wire_version)
+pymongo.errors.OperationFailure: Authentication failed., full error: {'ok': 0.0, 'errmsg': 'Authentication failed.', 'code': 18, 'codeName': 'AuthenticationFailed'}
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [17014]
+INFO:     Started server process [17360]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'test_main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [17360]
+INFO:     Started server process [17372]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [17372]
+INFO:     Started server process [17449]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
